@@ -1,0 +1,84 @@
+* {
+  box-sizing: border-box; }
+
+body {
+  font: 16px/1.5 "Merriweather", serif;
+  color: #fff5e6;
+  background-color: #406ff1;
+  background-image: linear-gradient(177deg, rgba(64, 111, 241, 0.9) 17%, #0b197b 100%), url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/283591/large-springfield-apartments-near-capital.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  height: 100%; }
+
+a {
+  color: inherit; }
+
+.hidden {
+  opacity: 0;
+  height: 0;
+  transition: all 0.2s ease; }
+
+.hidden.reveal {
+  opacity: 1;
+  height: auto; }
+
+h1, h2, h3, h4, h5 {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase; }
+
+h1 {
+  font-size: 2.827rem; }
+
+.headline {
+  text-align: center; }
+
+.headline--primary {
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  color: #fff5e6;
+  margin: 0.4rem 0; }
+
+.btn {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  outline: none;
+  border: 0;
+  color: #fff5e6;
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 4px; }
+
+.btn--primary {
+  background-color: #406ff1;
+  box-shadow: 0 2px 0 0 #114ced; }
+
+.calculator__container {
+  width: 50%;
+  margin: 1rem auto;
+  padding: 1rem 2rem;
+  background-color: #c03035;
+  background-image: linear-gradient(177deg, rgba(255, 96, 101, 0.92) 17%, #c03035 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0 4px 20px rgba(64, 111, 241, 0.5);
+  border-radius: 4px; }
+  @media (max-width: 800px) {
+    .calculator__container {
+      width: 90%; } }
+
+.calculator__input {
+  display: block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  width: 100%;
+  outline: none;
+  border: 2px solid transparent;
+  margin-bottom: 1rem; }
+  .calculator__input:focus, .calculator__input:hover {
+    border: 2px solid #ffabae; }
+
+.calculator__label {
+  display: block;
+  margin-bottom: 1rem; }

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!--  Meta  -->
+  <meta charset="UTF-8" />
+  <title>Illinois 2018 Gubernatorial Campaign Expenditures</title>
+
+  <!--  Styles  -->
+  <link href="https://fonts.googleapis.com/css?family=Merriweather|Raleway:600,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+
+  <div class="calculator__container">
+
+    <h1 class="headline headline--primary">Total spent</h1>
+
+    <p>
+      The Illinois gubernatorial race is on pace to be the most expensive in the nation. Just how expensive, you ask?
+    </p>
+
+    <div id="per-second-counter" class="hidden">
+      <h2>Rauner's total today: $<span id="spent-today"></span></h2>
+      <p><small>(Rauner is running unchallenged for the Republican nomination.)</small></p>
+    </div>
+
+    <!--
+    <section id="donation">
+      <p>
+        Enter a donation amount to see how long it will last for the various candidates.
+      </p>
+
+      <form action="" id="donation-form">
+        <label for="donation-amount">Donation Amount:</label>
+        <input type="number" id="donation-amount" name="donation-amount" max="100000" min="0" step="5" value="100" required />
+        <button class="btn btn--primary" type="submit" id="calculate-donation"></button>
+      </form>
+    </section>
+    -->
+
+    <section id="salary">
+      <p>
+        Enter an annual salary below to see how it compares to the average daily expenditures <sup><a href="#1">1</a></sup> of the campaign.
+      </p>
+
+      <form action="" id="salary-form">
+        <label class="calculator__label" for="amount">Your (or any) Yearly Salary:</label>
+        <input class="calculator__input" type="number" id="amount" name="amount" max="10000000000" min="0" step="1000" value="60000" required />
+        <button class="btn btn--primary" type="submit" id="calculate">Calculate!</button>
+      </form>
+
+      <div id="results" class="hidden">
+        <p>Rauner's campaign spends your annual salary in <span id="spent-time"></span>.</p>
+      </div>
+
+      <p>
+        Want a random fact about how quickly Rauner is spending the average cost of many life or day-to-day expenses?
+      </p>
+
+      <button class="btn btn--primary" type="button" id="random-fact">I do want a random fact!</button>
+
+      <div id="random-spend" class="hidden">
+        Rauner's campaign spends <span id="random-phrase"></span> ($<span id="random-amount"></span>) in <span id="random-time"></span>. <sup><a href="#2">2</a></sup>
+      </div>
+      <br>
+
+      <aside name="1">
+        <small>[1] Since June 1st, 2017 (<a href="https://www.illinoissunshine.org/" rel="external">source</a>)</small>
+      </aside>
+
+      <aside name="2">
+        <small id="random-source" class="hidden">[2] <a id="random-link" rel="external"><span id="random-text"></span></a></small>
+      </aside>
+    </section>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/facts.js"></script>
+  <script src="js/index.js"></script>
+</body>
+
+</html>
