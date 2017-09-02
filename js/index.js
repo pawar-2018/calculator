@@ -8,7 +8,6 @@
 - CPS budget is pretty high and doesn't make for a good data point. Maybe for all candidates instead?
 
 ## TODO:
-- Fix "time to spend salary" display to account for days
 - Only make Ruaner API call for this app - move other calls to new pen/app
 */
 
