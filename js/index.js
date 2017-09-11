@@ -15,7 +15,7 @@
     'use strict';
 
     var App = {
-        apiEndPoint: 'https://illinoissunshine.equalparts.io/proxy.php?csurl=https://www.illinoissunshine.org/api/expenditures/?committee_id=COMMITTEEID&expended_date__ge=2017-06-01',
+        apiEndPoint: 'https://pawarapis.com/api/expenditures/candidate/CANDIDATEID',
         candidates: [
             {
                 id: 'rauner',
@@ -79,11 +79,14 @@
             }
         ],
         defaultExpenditures: {
-            perDay: 0,
-            perSecond: 0,
+            expendituresCount: 0,
+            firstExpenditure: null,
+            spendingDays: 0,
+            spentPerDay: 0,
+            spentPerSecond: 0,
+            timestamp: null,
             total: 0
         },
-        expendituresStartDate: new Date(2017, 5, 1, 0, 0, 0, 0), // 2017-06-01
         storageDuration: 60 * 60 * 1000 * 2, // 2hrs (mins x secs x ms x hrs)
         elements: {
             amount: document.getElementById('amount'),
@@ -108,33 +111,6 @@
 
     // loaded from external file
     App.facts = facts;
-
-    App.calculateExpendituresTotal = function(expenses) {
-        return expenses.reduce(function(sum, expense) {
-            return expense.amount + sum;
-        }, 0);
-    };
-
-    App.calculateExpendituresPerDay = function(expendituresTotal) {
-        var today = new Date();
-        var endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0, 0);
-        var diff = endDate.getTime() - App.expendituresStartDate.getTime();
-        var seconds = diff / 1000;
-        seconds = Math.abs(seconds);
-        var days = seconds / 864000;
-
-        return (expendituresTotal / days).toFixed(2);
-    };
-
-    App.calculateExpendituresPerSecond = function(expendituresTotal) {
-        var today = new Date();
-        var endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0, 0);
-        var diff = endDate.getTime() - App.expendituresStartDate.getTime();
-        var seconds = diff / 1000;
-        seconds = Math.abs(seconds);
-
-        return (expendituresTotal / seconds).toFixed(2);
-    };
 
     App.formatSeconds = function(d) {
         // TODO: add days to final format
@@ -211,7 +187,7 @@
 
         // for some reason, Firefox can't see CORS headers without this conditional
         if (xhr.withCredentials !== undefined) {
-            xhr.open('GET', App.apiEndPoint.replace('COMMITTEEID', candidate.committeeId), true);
+            xhr.open('GET', App.apiEndPoint.replace('CANDIDATEID', candidate.id), true);
 
             xhr.onload = function() {
                 var dataFound = false;
@@ -222,27 +198,14 @@
                     var data = JSON.parse(xhr.responseText);
 
                     // make sure we got some data
-                    if (data.objects && data.objects.length > 0) {
-                        // make sure we have expenditure data
-                        if (data.objects[0].expenditures && data.objects[0].expenditures.length) {
-                            dataFound = true;
+                    if (data.timestamp) {
+                        dataFound = true;
 
-                            var total = parseInt(App.calculateExpendituresTotal(data.objects[0].expenditures), 10);
-                            var perDay = App.calculateExpendituresPerDay(total)
-                            var perSecond = App.calculateExpendituresPerSecond(total);
+                        // put the data in App.apiData
+                        App.populateCandidate(candidate, data);
 
-                            var candidateData = {
-                                perDay: perDay,
-                                perSecond: perSecond,
-                                total: total
-                            };
-
-                            // put the data in App.apiData
-                            App.populateCandidate(candidate, candidateData);
-
-                            // put the data in localStorage
-                            App.storeCandidateData(candidate, candidateData);
-                        }
+                        // put the data in localStorage
+                        App.storeCandidateData(candidate, data);
                     }
                 }
 
@@ -319,7 +282,7 @@
     App.initialDataDisplayer = function(candidate) {
         switch (candidate.id) {
             case 'rauner':
-                App.displayRaunerPerSecondCounter(candidate.data.perSecond);
+                App.displayRaunerPerSecondCounter(candidate.data.spentPerSecond);
 
                 break;
         }
@@ -333,7 +296,7 @@
             return candidate.id === 'rauner';
         });
 
-        App.displaySalaryResults(rauner[0].data.total, rauner[0].data.perSecond);
+        App.displaySalaryResults(rauner[0].data.total, rauner[0].data.spentPerSecond);
     });
 
     App.elements.random.addEventListener('click', function(e) {
@@ -346,10 +309,10 @@
         var rauner = App.candidates.filter(function(candidate) {
             return candidate.id === "rauner";
         });
-        console.log(rauner[0].data.perSecond);
+
         var randomFact = App.facts[randomNum()];
 
-        App.displayRandomResults(randomFact.fact, randomFact.amount, randomFact.source, rauner[0].data.perSecond);
+        App.displayRandomResults(randomFact.fact, randomFact.amount, randomFact.source, rauner[0].data.spentPerSecond);
     });
 
     /*
@@ -362,13 +325,12 @@
 
     // all things that should happen at page load
     App.init = function() {
-        // populate data for each candidate
+        // only need rauner data for now
         App.candidates.forEach(function(candidate) {
-            if (candidate.committeeId) {
+            if (candidate.id === 'rauner') {
                 App.loadCandidateData(candidate);
-            } else {
-                // default to zero spending (Hardiman only atm)
-                App.storeCandidateData(candidate, App.defaultExpenditures);
+
+                return;
             }
         });
     };
