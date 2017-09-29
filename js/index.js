@@ -103,7 +103,6 @@
             randomSpend: document.getElementById('random-spend'),
             randomLink: document.getElementById('random-link'),
             randomSource: document.getElementById('random-source'),
-            randomText: document.getElementById('random-text')
             //donationAmount: document.getElementById('donation-amount'),
             //calculateDonation: document.getElementById('calculate-donation')
         }
@@ -113,17 +112,22 @@
     App.facts = facts;
 
     App.formatSeconds = function(d) {
-        // TODO: add days to final format
         d = Number(d);
-        var h = Math.floor(d / 3600);
+        var D = Math.floor(d / 86400);
+        var h = Math.floor(D ? (d - (86400 * D)) / 3600 : d / 3600);
         var m = Math.floor(d % 3600 / 60);
         var s = Math.floor(d % 3600 % 60);
 
+        var DDisplay = D > 0 ? D + (d == 1 ? ' day' : ' days') : '';
         var hDisplay = h > 0 ? h + (h == 1 ? ' hour' : ' hours') : '';
         var mDisplay = m > 0 ? m + (m == 1 ? ' minute' : ' minutes') : '';
         var sDisplay = s > 0 ? s + (s == 1 ? ' second' : ' seconds') : '';
 
         var final = hDisplay;
+
+        if(DDisplay) {
+            final = DDisplay + ', ' + final;
+        }
 
         if (mDisplay !== '') {
             final += (hDisplay !== '' ? ', ' : '') + mDisplay;
@@ -148,7 +152,6 @@
 
         App.elements.randomPhrase.textContent = phrase;
         App.elements.randomLink.setAttribute('href', source);
-        App.elements.randomText.textContent = source;
         App.elements.randomAmount.textContent = Number(amount).toLocaleString();
         App.elements.randomTime.textContent = App.formatSeconds(secondsToSpend);
         App.elements.randomSpend.classList.add("reveal");
@@ -282,11 +285,29 @@
     App.initialDataDisplayer = function(candidate) {
         switch (candidate.id) {
             case 'rauner':
-                App.displayRaunerPerSecondCounter(candidate.data.spentPerSecond);
+                App.displayRaunerPerSecondCounter(candidate.data.perSecond);
 
                 break;
         }
     };
+
+    App.displayRaunerFact = function(e) {
+        if (e) {
+            e.preventDefault();
+        }
+
+        var randomNum = function() {
+            return Math.floor(Math.random() * App.facts.length);
+        };
+
+        var rauner = App.candidates.filter(function(candidate) {
+            return candidate.id === "rauner";
+        });
+        console.log(rauner[0].data.perSecond);
+        var randomFact = App.facts[randomNum()];
+
+        App.displayRandomResults(randomFact.fact, randomFact.amount, randomFact.source, rauner[0].data.perSecond);
+    }
 
     // wire up the buttons
     App.elements.calculate.addEventListener('click', function(e) {
@@ -296,24 +317,10 @@
             return candidate.id === 'rauner';
         });
 
-        App.displaySalaryResults(rauner[0].data.total, rauner[0].data.spentPerSecond);
+        App.displaySalaryResults(rauner[0].data.total, rauner[0].data.perSecond);
     });
 
-    App.elements.random.addEventListener('click', function(e) {
-        e.preventDefault();
-
-        var randomNum = function() {
-            return Math.floor(Math.random() * App.facts.length);
-        };
-
-        var rauner = App.candidates.filter(function(candidate) {
-            return candidate.id === "rauner";
-        });
-
-        var randomFact = App.facts[randomNum()];
-
-        App.displayRandomResults(randomFact.fact, randomFact.amount, randomFact.source, rauner[0].data.spentPerSecond);
-    });
+    App.elements.random.addEventListener('click', App.displayRaunerFact);
 
     /*
     App.elements.calculateDonation.addEventListener('click', function(e) {
@@ -329,10 +336,10 @@
         App.candidates.forEach(function(candidate) {
             if (candidate.id === 'rauner') {
                 App.loadCandidateData(candidate);
-
-                return;
             }
         });
+
+        App.displayRaunerFact();
     };
 
     // run it!
