@@ -2,17 +2,39 @@
   box-sizing: border-box; }
 
 body {
-  font: 16px/1.5 "Merriweather", serif;
-  color: #fff5e6;
-  background-color: #406ff1;
-  background-image: linear-gradient(177deg, rgba(64, 111, 241, 0.9) 17%, #0b197b 100%), url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/283591/large-springfield-apartments-near-capital.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
+  font: 3rem/1.5 "Montserrat", sans-serif;
+  color: #1b3a51;
+  text-align: center;
   min-height: 100vh;
-  height: 100%; }
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap; }
+
+.flex-item {
+  -webkit-flex: auto;
+  flex: auto;
+  padding: 1.5rem; }
+
+.flex-100 {
+  flex-basis: 100%; }
+
+.flex-60 {
+  flex-basis: 58.3333%; }
+
+.flex-40 {
+  flex-basis: 41.6666%; }
+
+.serif {
+  font-family: "Merriweather", serif; }
 
 a {
   color: inherit; }
+
+sup {
+  font-size: 1.5rem;
+  margin-left: 0.5rem; }
 
 .hidden {
   opacity: 0;
@@ -23,23 +45,55 @@ a {
   opacity: 1;
   height: auto; }
 
+.off-screen {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden; }
+
 h1, h2, h3, h4, h5 {
-  font-family: "Raleway", sans-serif;
-  text-transform: uppercase; }
+  font-family: "Merriweather", serif; }
 
 h1 {
-  font-size: 2.827rem; }
+  font-size: 4rem; }
+
+h2 {
+  font-size: 3rem;
+  font-weight: 700; }
 
 .headline {
-  text-align: center; }
+  font-size: 7rem;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0rem 15rem;
+  border-bottom: 1px solid #1b3a51; }
+  .headline span.name {
+    text-transform: none; }
 
-.headline--primary {
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
-  color: #fff5e6;
-  margin: 0.4rem 0; }
+.blue-block {
+  background: #1b3a51;
+  color: white;
+  padding: 1rem; }
+
+.red-border-right {
+  border-right: 3px solid #b91a24; }
+
+.red-border-bottom {
+  border-bottom: 3px solid #b91a24; }
+
+#spent-today {
+  font-size: 3em; }
+  #spent-today::before {
+    content: "$"; }
+
+#salary-question {
+  padding-bottom: 11rem; }
 
 .btn {
-  font-family: "Raleway", sans-serif;
+  font-family: "Merriweather", serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   outline: none;
@@ -50,23 +104,8 @@ h1 {
   border-radius: 4px; }
 
 .btn--primary {
-  background-color: #406ff1;
-  box-shadow: 0 2px 0 0 #114ced; }
-
-.calculator__container {
-  width: 50%;
-  margin: 1rem auto;
-  padding: 1rem 2rem;
-  background-color: #c03035;
-  background-image: linear-gradient(177deg, rgba(255, 96, 101, 0.92) 17%, #c03035 100%);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  box-shadow: 0 4px 20px rgba(64, 111, 241, 0.5);
-  border-radius: 4px; }
-  @media (max-width: 800px) {
-    .calculator__container {
-      width: 90%; } }
+  background-color: #496174;
+  box-shadow: 0 2px 0 0 #354755; }
 
 .calculator__input {
   display: block;
@@ -82,3 +121,7 @@ h1 {
 .calculator__label {
   display: block;
   margin-bottom: 1rem; }
+
+footer {
+  background-color: #496174;
+  color: white; }

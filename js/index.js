@@ -137,17 +137,22 @@
     };
 
     App.formatSeconds = function(d) {
-        // TODO: add days to final format
         d = Number(d);
-        var h = Math.floor(d / 3600);
+        var D = Math.floor(d / 86400);
+        var h = Math.floor(D ? (d - (86400 * D)) / 3600 : d / 3600);
         var m = Math.floor(d % 3600 / 60);
         var s = Math.floor(d % 3600 % 60);
 
+        var DDisplay = D > 0 ? D + (d == 1 ? ' day' : ' days') : '';
         var hDisplay = h > 0 ? h + (h == 1 ? ' hour' : ' hours') : '';
         var mDisplay = m > 0 ? m + (m == 1 ? ' minute' : ' minutes') : '';
         var sDisplay = s > 0 ? s + (s == 1 ? ' second' : ' seconds') : '';
 
         var final = hDisplay;
+
+        if(DDisplay) {
+            final = DDisplay + ', ' + final;
+        }
 
         if (mDisplay !== '') {
             final += (hDisplay !== '' ? ', ' : '') + mDisplay;
@@ -325,19 +330,10 @@
         }
     };
 
-    // wire up the buttons
-    App.elements.calculate.addEventListener('click', function(e) {
-        e.preventDefault();
-
-        var rauner = App.candidates.filter(function(candidate) {
-            return candidate.id === 'rauner';
-        });
-
-        App.displaySalaryResults(rauner[0].data.total, rauner[0].data.perSecond);
-    });
-
-    App.elements.random.addEventListener('click', function(e) {
-        e.preventDefault();
+    App.displayRaunerFact = function(e) {
+        if (e) { 
+            e.preventDefault();
+        }
 
         var randomNum = function() {
             return Math.floor(Math.random() * App.facts.length);
@@ -350,7 +346,20 @@
         var randomFact = App.facts[randomNum()];
 
         App.displayRandomResults(randomFact.fact, randomFact.amount, randomFact.source, rauner[0].data.perSecond);
+    }
+
+    // wire up the buttons
+    App.elements.calculate.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        var rauner = App.candidates.filter(function(candidate) {
+            return candidate.id === 'rauner';
+        });
+
+        App.displaySalaryResults(rauner[0].data.total, rauner[0].data.perSecond);
     });
+
+    App.elements.random.addEventListener('click', App.displayRaunerFact);
 
     /*
     App.elements.calculateDonation.addEventListener('click', function(e) {
@@ -371,6 +380,8 @@
                 App.storeCandidateData(candidate, App.defaultExpenditures);
             }
         });
+
+        App.displayRaunerFact();
     };
 
     // run it!
