@@ -1,27 +1,70 @@
-$primary-font: 'Raleway', sans-serif;
-$secondary-font: 'Merriweather', serif;
+$serif-font: 'Merriweather', serif;
+$sans-serif-font: 'Montserrat', sans-serif;
 
-$light-blue: #406ff1;
-$dark-blue: #0b197b;
+// Pawar color palette
+// Warm colors
+$burnt-orange: #F3795D;
+// Cool colors
+$light-blue: #0079A0;
+$navy-blue: #233368;
+$navy-blue-dk: #222b46;
+$dark-blue: #161f3a;
+// Color Values
+$white: #ffffff;
+$extra-light-gray: #f7f7f7;
+$light-gray: #e6e6e6;
+$medium-gray: #cacaca;
+$gray: #969696;
+$dark-gray: #8a8a8a;
+$charcoal: #414141;
+$black: #0a0a0a;
+
+$color__background-button: $light-blue;
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    font: 16px/1.5 $secondary-font;
-    color: #fff5e6;
-    background-color: $light-blue;
-    background-image: linear-gradient(177deg, rgba($light-blue, 0.9) 17%, $dark-blue 100%),
-                      url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/283591/large-springfield-apartments-near-capital.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    height: 100%;
+  font: 2rem/1.5 $sans-serif-font;
+  color: $dark-blue;
+  text-align: center;
+  min-height: 100vh;
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+
+  @media print, screen and (min-width: 768px) {
+    font-size: 3rem;
+  }
 }
 
-a {
-    color: inherit;
+.flex-item {
+  -webkit-flex: auto;
+  flex: 0 0 auto;
+  padding: 2rem;
+}
+
+.flex-full {
+  flex-basis: 100%;
+  max-width: 100%;
+}
+
+.flex-half {
+  -webkit-box-flex: 0;
+  flex: 0 0 100%;
+  max-width: 100%;
+  
+  @media print, screen and (min-width: 64em) {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+.collapse-top-padding {
+  padding-top: 0;
 }
 
 .hidden {
@@ -35,75 +78,172 @@ a {
     height: auto;
 }
 
+.off-screen {
+  position:absolute;
+  left:-10000px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+
 h1, h2, h3, h4, h5 {
-    font-family: $primary-font;
-    text-transform: uppercase;
+    font-family: $serif-font;
 }
 
 h1 {
-    font-size: 2.827rem;
+    font-size: 4rem;
 }
+
+h2 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+hr {
+  border: none;
+  height: 1rem;
+  background-color: $burnt-orange;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+sup {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+}
+
+input {
+  text-align: center;
+}
+
 
 .headline {
-    text-align: center;
+  line-height: 1.2;
+  font-size: 2.25rem;
+  font-weight: 900; 
+  text-align: center;
+  margin: 0rem; 
+  border-bottom: 1px solid $dark-blue;
+  padding-bottom: 2rem;
+
+  @media only screen and (min-width:321px) {
+    font-size: 2.5rem;
+  }
+
+  @media only screen and (min-width:640px) {
+    font-size: 5rem;
+  }
+
+  @media only screen and (min-width:768px) {
+    margin: 0rem 2rem;
+  }
+
+  @media only screen and (min-width:980px) {
+    font-size: 7.5rem;
+  }
+
+  @media only screen and (min-width:1280px) {
+    font-size: 10rem;
+  }
 }
 
-.headline--primary {
-    text-shadow: 0 0 4px rgba(black, 0.25);
-    color: #fff5e6;
-    margin: 0.4rem 0;
+.blue-block {
+  background: $navy-blue-dk;
+  color: white;
 }
 
-.btn {
-    font-family: $primary-font;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    outline: none;
-    border: 0;
-    color: #fff5e6;
-    padding: 0.25rem 0.5rem;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-}
+#per-second-counter {
+  font-family: $serif-font;
+  font-size: 2.5rem;
 
-.btn--primary {
-    background-color: $light-blue;
-    box-shadow: 0 2px 0 0 darken($light-blue, 10%);
-}
+  @media only screen and (min-width:321px) {
+    font-size: 3rem;
+  }
 
-.calculator__container {
-    width: 50%;
-    margin: 1rem auto;
-    padding: 1rem 2rem;
-    background-color: #c03035;
-    background-image: linear-gradient(177deg, rgba(#ff6065, 0.92) 17%, #c03035 100%);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    box-shadow: 0 4px 20px rgba($light-blue, 0.5);
-    border-radius: 4px;
-
-    @media (max-width: 800px) {
-        width: 90%;
+  #spent-today {
+    @media only screen and (min-width:640px) {
+      font-size: 6rem;
     }
-}
 
-.calculator__input {
-    display: block;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    width: 100%;
-    outline: none;
-    border: 2px solid transparent;
-    margin-bottom: 1rem;
-
-    &:focus,
-    &:hover {
-        border: 2px solid #ffabae;
+    @media only screen and (min-width:980px) {
+      font-size: 8.25rem;
     }
+
+    @media only screen and (min-width:1280px) {
+      font-size: 12.5rem;
+    }
+
+    &::before {
+      content: "$";
+    }
+  }
 }
 
-.calculator__label {
-    display: block;
-    margin-bottom: 1rem;
+#random-spend {
+  padding: 1rem 0rem;
+  min-height: 13.5rem;
+}
+
+// https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
+.break-words {
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.dont-break-words {
+  word-break: normal;
+}
+
+.button {
+  cursor: pointer;
+  background: $color__background-button;
+  border-radius: 1.5rem;
+  color: $white;
+  font-weight: 600;
+  text-align: center;
+  min-width: 10rem;
+  padding: 0.875rem 2rem;
+  transition: all .15s ease;
+  border-bottom: 0;
+  margin-top: 1rem;
+
+  &:hover {
+    text-decoration: none;
+    background: darken($color__background-button, 10);
+    color: $white;
+  }
+
+  &:visited {
+    color: $white;
+  }
+
+  &:focus {
+    background: darken($color__background-button, 15);
+    outline: none;
+  }
+}
+
+footer {
+  background-color: $charcoal;
+  color: white;
 }
