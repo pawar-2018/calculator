@@ -118,7 +118,7 @@
         var m = Math.floor(d % 3600 / 60);
         var s = Math.floor(d % 3600 % 60);
 
-        var DDisplay = D > 0 ? D + (d == 1 ? ' day' : ' days') : '';
+        var DDisplay = D > 0 ? D + (D == 1 ? ' day' : ' days') : '';
         var hDisplay = h > 0 ? h + (h == 1 ? ' hour' : ' hours') : '';
         var mDisplay = m > 0 ? m + (m == 1 ? ' minute' : ' minutes') : '';
         var sDisplay = s > 0 ? s + (s == 1 ? ' second' : ' seconds') : '';
