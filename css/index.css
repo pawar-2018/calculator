@@ -2,8 +2,8 @@
   box-sizing: border-box; }
 
 body {
-  font: 3rem/1.5 "Montserrat", sans-serif;
-  color: #1b3a51;
+  font: 2rem/1.5 "Montserrat", sans-serif;
+  color: #161f3a;
   text-align: center;
   min-height: 100vh;
   height: 100%;
@@ -11,30 +11,30 @@ body {
   display: flex;
   -webkit-flex-flow: row wrap;
   flex-flow: row wrap; }
+  @media print, screen and (min-width: 768px) {
+    body {
+      font-size: 3rem; } }
 
 .flex-item {
   -webkit-flex: auto;
-  flex: auto;
-  padding: 1.5rem; }
+  flex: 0 0 auto;
+  padding: 2rem; }
 
-.flex-100 {
-  flex-basis: 100%; }
+.flex-full {
+  flex-basis: 100%;
+  max-width: 100%; }
 
-.flex-60 {
-  flex-basis: 58.3333%; }
+.flex-half {
+  -webkit-box-flex: 0;
+  flex: 0 0 100%;
+  max-width: 100%; }
+  @media print, screen and (min-width: 64em) {
+    .flex-half {
+      flex: 0 0 50%;
+      max-width: 50%; } }
 
-.flex-40 {
-  flex-basis: 41.6666%; }
-
-.serif {
-  font-family: "Merriweather", serif; }
-
-a {
-  color: inherit; }
-
-sup {
-  font-size: 1.5rem;
-  margin-left: 0.5rem; }
+.collapse-top-padding {
+  padding-top: 0; }
 
 .hidden {
   opacity: 0;
@@ -63,65 +63,114 @@ h2 {
   font-size: 3rem;
   font-weight: 700; }
 
+hr {
+  border: none;
+  height: 1rem;
+  background-color: #F3795D; }
+
+p {
+  margin: 0; }
+
+a {
+  color: inherit; }
+
+sup {
+  font-size: 1.5rem;
+  margin-left: 0.5rem; }
+
+input {
+  text-align: center; }
+
 .headline {
-  font-size: 7rem;
+  line-height: 1.2;
+  font-size: 2.25rem;
   font-weight: 900;
   text-align: center;
-  text-transform: uppercase;
-  margin: 0rem 15rem;
-  border-bottom: 1px solid #1b3a51; }
-  .headline span.name {
-    text-transform: none; }
+  margin: 0rem;
+  border-bottom: 1px solid #161f3a;
+  padding-bottom: 2rem; }
+  @media only screen and (min-width: 321px) {
+    .headline {
+      font-size: 2.5rem; } }
+  @media only screen and (min-width: 640px) {
+    .headline {
+      font-size: 5rem; } }
+  @media only screen and (min-width: 768px) {
+    .headline {
+      margin: 0rem 2rem; } }
+  @media only screen and (min-width: 980px) {
+    .headline {
+      font-size: 7.5rem; } }
+  @media only screen and (min-width: 1280px) {
+    .headline {
+      font-size: 10.5rem; } }
 
 .blue-block {
-  background: #1b3a51;
-  color: white;
-  padding: 1rem; }
+  background: #222b46;
+  color: white; }
 
-.red-border-right {
-  border-right: 3px solid #b91a24; }
-
-.red-border-bottom {
-  border-bottom: 3px solid #b91a24; }
-
-#spent-today {
-  font-size: 3em; }
-  #spent-today::before {
+#per-second-counter {
+  font-family: "Merriweather", serif;
+  font-size: 2.5rem; }
+  @media only screen and (min-width: 321px) {
+    #per-second-counter {
+      font-size: 3rem; } }
+  @media only screen and (min-width: 640px) {
+    #per-second-counter #spent-today {
+      font-size: 6rem; } }
+  @media only screen and (min-width: 980px) {
+    #per-second-counter #spent-today {
+      font-size: 8.25rem; } }
+  @media only screen and (min-width: 1280px) {
+    #per-second-counter #spent-today {
+      font-size: 12.5rem; } }
+  #per-second-counter #spent-today::before {
     content: "$"; }
 
-#salary-question {
-  padding-bottom: 11rem; }
+#random-spend {
+  padding: 1rem 0rem;
+  min-height: 13.5rem; }
 
-.btn {
-  font-family: "Merriweather", serif;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  outline: none;
-  border: 0;
-  color: #fff5e6;
-  padding: 0.25rem 0.5rem;
-  margin-bottom: 1rem;
-  border-radius: 4px; }
+.break-words {
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto; }
 
-.btn--primary {
-  background-color: #496174;
-  box-shadow: 0 2px 0 0 #354755; }
+.dont-break-words {
+  word-break: normal; }
 
-.calculator__input {
-  display: block;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  width: 100%;
-  outline: none;
-  border: 2px solid transparent;
-  margin-bottom: 1rem; }
-  .calculator__input:focus, .calculator__input:hover {
-    border: 2px solid #ffabae; }
-
-.calculator__label {
-  display: block;
-  margin-bottom: 1rem; }
+.button {
+  cursor: pointer;
+  background: #0079A0;
+  border-radius: 1.5rem;
+  color: #ffffff;
+  font-weight: 600;
+  text-align: center;
+  min-width: 10rem;
+  padding: 0.875rem 2rem;
+  transition: all .15s ease;
+  border-bottom: 0;
+  margin-top: 1rem; }
+  .button:hover {
+    text-decoration: none;
+    background: #00526d;
+    color: #ffffff; }
+  .button:visited {
+    color: #ffffff; }
+  .button:focus {
+    background: #003f54;
+    outline: none; }
 
 footer {
-  background-color: #496174;
+  background-color: #414141;
   color: white; }

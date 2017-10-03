@@ -1,55 +1,70 @@
 $serif-font: 'Merriweather', serif;
 $sans-serif-font: 'Montserrat', sans-serif;
 
-$light-blue: #496174;
-$dark-blue: #1b3a51;
-$red: #b91a24;
+// Pawar color palette
+// Warm colors
+$burnt-orange: #F3795D;
+// Cool colors
+$light-blue: #0079A0;
+$navy-blue: #233368;
+$navy-blue-dk: #222b46;
+$dark-blue: #161f3a;
+// Color Values
+$white: #ffffff;
+$extra-light-gray: #f7f7f7;
+$light-gray: #e6e6e6;
+$medium-gray: #cacaca;
+$gray: #969696;
+$dark-gray: #8a8a8a;
+$charcoal: #414141;
+$black: #0a0a0a;
+
+$color__background-button: $light-blue;
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    font: 3rem/1.5 $sans-serif-font;
-    color: $dark-blue;
-    text-align: center;
-    min-height: 100vh;
-    height: 100%;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-flow: row wrap;
-    flex-flow: row wrap;
+  font: 2rem/1.5 $sans-serif-font;
+  color: $dark-blue;
+  text-align: center;
+  min-height: 100vh;
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+
+  @media print, screen and (min-width: 768px) {
+    font-size: 3rem;
+  }
 }
 
 .flex-item {
   -webkit-flex: auto;
-  flex: auto;
-  padding: 1.5rem;
+  flex: 0 0 auto;
+  padding: 2rem;
 }
 
-.flex-100 {
+.flex-full {
   flex-basis: 100%;
+  max-width: 100%;
 }
 
-.flex-60 {
-  flex-basis: 58.3333%
+.flex-half {
+  -webkit-box-flex: 0;
+  flex: 0 0 100%;
+  max-width: 100%;
+  
+  @media print, screen and (min-width: 64em) {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
 }
 
-.flex-40 {
-  flex-basis: 41.6666%;
-}
-
-.serif {
-  font-family: $serif-font;
-}
-
-a {
-  color: inherit;
-}
-
-sup {
-  font-size: 1.5rem;
-  margin-left: 0.5rem;
+.collapse-top-padding {
+  padding-top: 0;
 }
 
 .hidden {
@@ -85,89 +100,150 @@ h2 {
     font-weight: 700;
 }
 
+hr {
+  border: none;
+  height: 1rem;
+  background-color: $burnt-orange;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+sup {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+}
+
+input {
+  text-align: center;
+}
+
+
 .headline {
-  font-size: 7rem;
+  line-height: 1.2;
+  font-size: 2.25rem;
   font-weight: 900; 
   text-align: center;
-  text-transform: uppercase;
-  margin: 0rem 15rem; 
+  margin: 0rem; 
   border-bottom: 1px solid $dark-blue;
+  padding-bottom: 2rem;
 
-  span.name {
-    text-transform: none;
+  @media only screen and (min-width:321px) {
+    font-size: 2.5rem;
+  }
+
+  @media only screen and (min-width:640px) {
+    font-size: 5rem;
+  }
+
+  @media only screen and (min-width:768px) {
+    margin: 0rem 2rem;
+  }
+
+  @media only screen and (min-width:980px) {
+    font-size: 7.5rem;
+  }
+
+  @media only screen and (min-width:1280px) {
+    font-size: 10.5rem;
   }
 }
 
 .blue-block {
-  background: $dark-blue;
+  background: $navy-blue-dk;
   color: white;
-  padding: 1rem;
 }
 
-.red-border-right {
-  border-right: 3px solid $red;
-}
+#per-second-counter {
+  font-family: $serif-font;
+  font-size: 2.5rem;
 
-.red-border-bottom {
-  border-bottom: 3px solid $red;
-}
+  @media only screen and (min-width:321px) {
+    font-size: 3rem;
+  }
 
-#spent-today {
-  font-size: 3em;
+  #spent-today {
+    @media only screen and (min-width:640px) {
+      font-size: 6rem;
+    }
 
-  &::before {
-    content: "$";
+    @media only screen and (min-width:980px) {
+      font-size: 8.25rem;
+    }
+
+    @media only screen and (min-width:1280px) {
+      font-size: 12.5rem;
+    }
+
+    &::before {
+      content: "$";
+    }
   }
 }
 
-#salary-question {
-  padding-bottom: 11rem;
+#random-spend {
+  padding: 1rem 0rem;
+  min-height: 13.5rem;
 }
 
+// https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
+.break-words {
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
 
-.btn {
-    font-family: $serif-font;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.dont-break-words {
+  word-break: normal;
+}
+
+.button {
+  cursor: pointer;
+  background: $color__background-button;
+  border-radius: 1.5rem;
+  color: $white;
+  font-weight: 600;
+  text-align: center;
+  min-width: 10rem;
+  padding: 0.875rem 2rem;
+  transition: all .15s ease;
+  border-bottom: 0;
+  margin-top: 1rem;
+
+  &:hover {
+    text-decoration: none;
+    background: darken($color__background-button, 10);
+    color: $white;
+  }
+
+  &:visited {
+    color: $white;
+  }
+
+  &:focus {
+    background: darken($color__background-button, 15);
     outline: none;
-    border: 0;
-    color: #fff5e6;
-    padding: 0.25rem 0.5rem;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-}
-
-.btn--primary {
-    background-color: $light-blue;
-    box-shadow: 0 2px 0 0 darken($light-blue, 10%);
-}
-
-.calculator__container {
-  
-}
-
-.calculator__input {
-    display: block;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    width: 100%;
-    outline: none;
-    border: 2px solid transparent;
-    margin-bottom: 1rem;
-
-    &:focus,
-    &:hover {
-        border: 2px solid #ffabae;
-    }
-}
-
-.calculator__label {
-    display: block;
-    margin-bottom: 1rem;
+  }
 }
 
 footer {
-  background-color: $light-blue;
+  background-color: $charcoal;
   color: white;
 }
