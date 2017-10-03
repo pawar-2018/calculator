@@ -292,7 +292,7 @@
     };
 
     App.displayRaunerFact = function(e) {
-        if (e) {
+        if (e) { 
             e.preventDefault();
         }
 
