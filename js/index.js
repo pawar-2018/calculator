@@ -285,8 +285,8 @@
     App.initialDataDisplayer = function(candidate) {
         switch (candidate.id) {
             case 'rauner':
-                App.displayRaunerPerSecondCounter(candidate.data.perSecond);
-
+                App.displayRaunerPerSecondCounter(candidate.data.spentPerSecond);
+                App.displayRaunerFact();
                 break;
         }
     };
@@ -303,10 +303,9 @@
         var rauner = App.candidates.filter(function(candidate) {
             return candidate.id === "rauner";
         });
-        console.log(rauner[0].data.perSecond);
         var randomFact = App.facts[randomNum()];
 
-        App.displayRandomResults(randomFact.fact, randomFact.amount, randomFact.source, rauner[0].data.perSecond);
+        App.displayRandomResults(randomFact.fact, randomFact.amount, randomFact.source, rauner[0].data.spentPerSecond);
     }
 
     // wire up the buttons
@@ -317,7 +316,7 @@
             return candidate.id === 'rauner';
         });
 
-        App.displaySalaryResults(rauner[0].data.total, rauner[0].data.perSecond);
+        App.displaySalaryResults(rauner[0].data.total, rauner[0].data.spentPerSecond);
     });
 
     App.elements.random.addEventListener('click', App.displayRaunerFact);
@@ -338,8 +337,6 @@
                 App.loadCandidateData(candidate);
             }
         });
-
-        App.displayRaunerFact();
     };
 
     // run it!
