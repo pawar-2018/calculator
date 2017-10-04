@@ -1,2 +1,1 @@
-web: node index.js
-twitter: node twitter.js
+web: http-server
