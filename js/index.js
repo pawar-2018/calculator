@@ -15,7 +15,7 @@
     'use strict';
 
     var App = {
-        apiEndPoint: 'https://pawarapis.com/api/expenditures/candidate/CANDIDATEID',
+        apiEndPoint: 'https://expenditures.pawarapis.com/candidate/CANDIDATEID',
         candidates: [
             {
                 id: 'rauner',
