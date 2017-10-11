@@ -102,7 +102,9 @@
             randomTime: document.getElementById('random-time'),
             randomSpend: document.getElementById('random-spend'),
             randomLink: document.getElementById('random-link'),
-            randomSource: document.getElementById('random-source')
+            randomSource: document.getElementById('random-source'),
+            averageSource: document.getElementById('average-source'),
+            averageStartDate: document.getElementById('average-start-date')
             //donationAmount: document.getElementById('donation-amount'),
             //calculateDonation: document.getElementById('calculate-donation')
         }
@@ -287,6 +289,7 @@
             case 'rauner':
                 App.displayRaunerPerSecondCounter(candidate.data.spentPerSecond);
                 App.displayRaunerFact();
+                App.displaySource(new Date(candidate.data.firstExpenditure));
                 break;
         }
     };
@@ -306,6 +309,11 @@
         var randomFact = App.facts[randomNum()];
 
         App.displayRandomResults(randomFact.fact, randomFact.amount, randomFact.source, rauner[0].data.spentPerSecond);
+    }
+
+    App.displaySource = function(date) {
+        App.elements.averageStartDate.textContent = date.toLocaleDateString();
+        App.elements.averageSource.classList.add('reveal');
     }
 
     // wire up the buttons
