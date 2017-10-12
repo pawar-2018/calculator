@@ -32,6 +32,7 @@ body {
   min-height: 100vh;
   height: 100%;
   display: -webkit-flex;
+  display: -ms-flex-box;
   display: flex;
   -webkit-flex-flow: row wrap;
   flex-flow: row wrap;
@@ -60,6 +61,12 @@ body {
   @media print, screen and (min-width: 64em) {
     flex: 0 0 50%;
     max-width: 50%;
+  }
+
+  // IE10-11
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) and (min-width: 64em) {
+    flex: 0 0 44.25%;
+    max-width: 100%;
   }
 }
 
@@ -121,6 +128,11 @@ sup {
 
 input {
   text-align: center;
+
+  // IE10-11
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    width: 50%;
+  }
 }
 
 

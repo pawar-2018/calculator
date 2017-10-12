@@ -8,6 +8,7 @@ body {
   min-height: 100vh;
   height: 100%;
   display: -webkit-flex;
+  display: -ms-flex-box;
   display: flex;
   -webkit-flex-flow: row wrap;
   flex-flow: row wrap; }
@@ -32,6 +33,10 @@ body {
     .flex-half {
       flex: 0 0 50%;
       max-width: 50%; } }
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) and (min-width: 64em) {
+    .flex-half {
+      flex: 0 0 44.25%;
+      max-width: 100%; } }
 
 .collapse-top-padding {
   padding-top: 0; }
@@ -80,6 +85,9 @@ sup {
 
 input {
   text-align: center; }
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    input {
+      width: 50%; } }
 
 .headline {
   line-height: 1.2;
