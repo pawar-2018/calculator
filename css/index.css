@@ -82,7 +82,11 @@ sup {
   margin-left: 0.5rem; }
 
 input {
-  text-align: center; }
+  text-align: center;
+  width: 100%; }
+  @media only screen and (min-width: 480px) {
+    input {
+      width: auto; } }
 
 .headline {
   line-height: 1.2;
@@ -120,24 +124,6 @@ input {
 
 #random-spend {
   padding: 1rem 0rem; }
-
-.break-words {
-  /* These are technically the same, but use both */
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  -ms-word-break: break-all;
-  /* This is the dangerous one in WebKit, as it breaks things wherever */
-  word-break: break-all;
-  /* Instead use this non-standard one: */
-  word-break: break-word;
-  /* Adds a hyphen where the word breaks, if supported (No Blink) */
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto; }
-
-.dont-break-words {
-  word-break: normal; }
 
 .button {
   cursor: pointer;
